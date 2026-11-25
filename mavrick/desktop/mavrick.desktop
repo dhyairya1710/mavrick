@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Mavrick
+GenericName=AI System Assistant
+Comment=Autonomous Pop!_OS assistant powered by Antigravity
+Exec=mavrick
+Icon=system-search
+Terminal=false
+Type=Application
+Categories=Utility;System;Core;
+Keywords=ai;jarvis;mavrick;antigravity;assistant;spotlight;split;
+StartupNotify=false

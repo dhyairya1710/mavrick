@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export PYTHONPATH="$REPO_DIR:$HOME/.local/share/mavrick:$HOME/.local/share/mavrick/app:/usr/lib/mavrick:/usr/lib:$PYTHONPATH"
+exec /usr/bin/python3 -m mavrick.cli "$@"

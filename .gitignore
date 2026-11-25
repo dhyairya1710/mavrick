@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.deb
+*.whl
+build/
+*.egg-info/
+*/**/*.zip
+.extract/
+Open Design/.extract/
+.pytest_cache/

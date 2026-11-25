@@ -1,0 +1,29 @@
+{
+  "kind": "reference",
+  "name": "OpenDesign-inspired",
+  "descriptor": {
+    "moods": [
+      "warm",
+      "technical",
+      "editorial",
+      "minimal"
+    ],
+    "industries": [
+      "design",
+      "ai",
+      "developer-tools"
+    ],
+    "surfaces": [
+      "web",
+      "mobile",
+      "slides"
+    ]
+  },
+  "sources": {
+    "urls": [
+      "https://open-design.ai/"
+    ],
+    "bundleDir": "Open Design/.extract/open-design-ai"
+  },
+  "version": 1
+}

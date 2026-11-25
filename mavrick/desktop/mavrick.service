@@ -1,0 +1,14 @@
+[Unit]
+Description=MAVRICK Desktop AI Operating System Assistant
+After=graphical-session.target
+
+[Service]
+Type=simple
+Environment="PATH=%h/.npm-global/bin:%h/.local/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="PYTHONPATH=/usr/lib/mavrick:/usr/lib:%h/.local/share/mavrick"
+ExecStart=/usr/bin/python3 -m mavrick.ui
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mavrick"
+version = "2.0.0"
+description = "Desktop command palette and policy-governed workflow runner"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+mavrick = "mavrick.cli:main"
+mavrickd = "mavrick.daemon:main"
+
+[tool.setuptools]
+package-dir = {"mavrick" = "."}
+packages = ["mavrick", "mavrick.mcp", "mavrick.platform", "mavrick.providers", "mavrick.tools", "mavrick.ui", "mavrick.tests"]
+
+[tool.setuptools.package-data]
+mavrick = ["desktop/*"]

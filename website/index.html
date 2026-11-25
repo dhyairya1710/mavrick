@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#050507">
+  <title>MAVRICK — Grown, not built.</title>
+  <meta name="description" content="MAVRICK v2.0.0 — Policy-governed desktop command palette and local-first AI runtime for Linux, Windows, and macOS.">
+  <link rel="icon" href="assets/mavrick-mark.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/OTFGlusp-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/Manrope-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three/three.module.min.js",
+      "three/addons/environments/RoomEnvironment.js": "./vendor/three/RoomEnvironment.js"
+    }
+  }
+  </script>
+</head>
+<body id="top" data-act="1">
+  <!-- Minimal Loader (pure black screen + pulsing 9u cream dot) -->
+  <div id="loader" class="loader" aria-hidden="true">
+    <span class="loader-dot"></span>
+  </div>
+
+  <!-- Single Persistent WebGL Canvas -->
+  <canvas id="stage-canvas" aria-hidden="true"></canvas>
+  <div id="precision-cursor" aria-hidden="true"></div>
+
+  <!-- =====================================================================
+       ACT I OVERLAY — Night Botanical Valley ("Grown, not built.")
+       ===================================================================== -->
+  <section id="act1-overlay" class="act-overlay act1-overlay is-active" inert aria-label="Act I: Night Botanical Valley">
+    <header class="act1-header">
+      <a href="#top" id="act1-brand" class="brand-wordmark">
+        <span class="brand-diamond" aria-hidden="true">&#9671;</span>
+        <span>Mavrick</span>
+      </a>
+
+      <nav class="act1-nav" aria-label="Primary navigation">
+        <button type="button" class="nav-text-btn" data-go-act="2">Monolith</button>
+        <button type="button" class="nav-text-btn" data-go-act="3">Architecture</button>
+        <a href="https://github.com/dhyairya1710/mavrick" class="nav-text-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <button type="button" id="open-download-btn" class="cream-pill-btn">Download</button>
+      </nav>
+    </header>
+
+    <div class="act1-hero">
+      <h1 class="act1-title">
+        <span class="type-mask"><span class="type-rise">Grown,</span></span>
+        <span class="type-mask"><em class="type-rise display-phrase">not built.</em></span>
+      </h1>
+      <p class="act1-caption">
+        A local-first command palette.<br>
+        Instant actions, governed by policy.
+      </p>
+      <button
+        type="button"
+        id="enter-monolith"
+        class="enter-circle-btn"
+        aria-label="Enter Smoked-Glass Command Monolith"
+      >
+        <svg class="enter-arrow-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+          <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="act1-corner-controls">
+      <span class="scroll-hint">Scroll to wander</span>
+      <span class="corner-divider" aria-hidden="true"></span>
+      <button
+        type="button"
+        id="audio-toggle-btn"
+        class="audio-btn"
+        aria-pressed="false"
+        aria-label="Toggle procedural night ambient sound"
+        title="Toggle ambient night-air sound"
+      >
+        <svg id="audio-icon-muted" viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
+          <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M22 9L16 15M16 9L22 15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <svg id="audio-icon-unmuted" viewBox="0 0 24 24" width="16" height="16" fill="none" hidden aria-hidden="true">
+          <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M15.54 8.46C16.4774 9.39764 17.004 10.6692 17.004 11.995C17.004 13.3208 16.4774 14.5924 15.54 15.53" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M19.07 4.93C20.9447 6.80528 21.9979 9.34836 21.9979 12C21.9979 14.6516 20.9447 17.1947 19.07 19.07" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       ACT II OVERLAY — Per-Shard matrix3d Homography DOM over Smoked Glass
+       ===================================================================== -->
+  <section id="act2-overlay" tabindex="-1" class="act-overlay act2-overlay" aria-label="Act II: Smoked-Glass Command Monolith" aria-hidden="true">
+    <!-- Nav Slab Independent Homography Plane -->
+    <div id="nav-dom-overlay" class="homography-plane nav-homography">
+      <div class="shard-abs-stage">
+        <span class="glass-hit-label" id="nav-hit-brand">&#9671; Mavrick</span>
+        <button type="button" id="nav-hit-valley" class="glass-hit-btn" data-go-act="1">Valley</button>
+        <button type="button" id="nav-hit-monolith" class="glass-hit-btn is-current" data-go-act="2">Monolith</button>
+        <button type="button" id="nav-hit-arch" class="glass-hit-btn" data-go-act="3">Architecture</button>
+        <a href="https://github.com/dhyairya1710/mavrick" id="nav-hit-github" class="glass-hit-btn" target="_blank" rel="noopener noreferrer">GitHub &#8599;</a>
+      </div>
+    </div>
+
+    <!-- Shard 0 Independent Homography Plane: Display Headline & Subcopy -->
+    <div id="shard-dom-0" class="homography-plane shard-homography">
+      <div class="shard-abs-stage">
+        <div id="shard-copy-0" class="glass-selectable-copy">
+          <p class="glass-eyebrow">Local &middot; Policy-gated</p>
+          <h2 class="glass-headline">Desktop <em class="display-phrase">command palette.</em></h2>
+          <p class="glass-subcopy">Launch apps, calculate, and approve multi-step workflows.</p>
+          <p class="glass-subcopy"><strong>0.039 ms</strong> multi-app lookup</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shard 1 Independent Homography Plane: Interactive Command Bar, Live Result & Actions -->
+    <div id="shard-dom-1" class="homography-plane shard-homography">
+      <div class="shard-abs-stage">
+        <form id="glass-cmd-form" class="glass-cmd-form" autocomplete="off">
+          <input
+            id="glass-cmd-input"
+            class="glass-cmd-input"
+            type="text"
+            value="open files, vlc and vscode"
+            placeholder="Command or expression..."
+            aria-label="Mavrick glass command input"
+            maxlength="256"
+            spellcheck="false"
+          >
+          <button type="submit" id="glass-cmd-run" class="glass-hit-btn">Run</button>
+        </form>
+
+        <div id="glass-cmd-output" class="glass-selectable-copy" aria-live="polite">
+          <div id="glass-out-badge">Instant &middot; 0.039 ms</div>
+          <div id="glass-out-title">Launched: Files, VLC, VS Code</div>
+          <div id="glass-out-detail">cosmic-files.desktop &middot; org.videolan.VLC.desktop &middot; code.desktop</div>
+        </div>
+
+        <!-- Contextual Interactive Action Buttons aligned strictly via shared coords -->
+        <button type="button" id="glass-act-primary" class="glass-hit-btn" hidden>Run 2 steps</button>
+        <button type="button" id="glass-act-secondary" class="glass-hit-btn" hidden>Cancel</button>
+      </div>
+    </div>
+
+    <!-- Shard 2 Independent Homography Plane: Quick-Prompt Presets & Primary CTAs -->
+    <div id="shard-dom-2" class="homography-plane shard-homography" role="group" aria-label="Try a command">
+      <div class="shard-abs-stage">
+        <button type="button" class="glass-hit-btn glass-preset-btn is-active" data-preset="open files, vlc and vscode">open files, vlc and vscode</button>
+        <button type="button" class="glass-hit-btn glass-preset-btn" data-preset="245 * 18.5">245 * 18.5</button>
+        <button type="button" class="glass-hit-btn glass-preset-btn" data-preset="organize downloads">organize downloads</button>
+        <button type="button" class="glass-hit-btn glass-preset-btn" data-preset="purge apt cache">purge apt cache</button>
+        <button type="button" id="glass-get-mavrick" class="glass-hit-btn glass-pill-hit">Get Mavrick</button>
+        <button type="button" id="glass-read-arch" class="glass-hit-btn">Read architecture &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Shard 3 Independent Homography Plane: Platforms -->
+    <div id="shard-dom-3" class="homography-plane shard-homography">
+      <div class="shard-abs-stage">
+        <div id="shard-copy-3" class="glass-selectable-copy">
+          <h3>Platforms</h3>
+          <p>Local CLI and daemon on Linux, Windows, and macOS.</p>
+          <p>Default daemon transport is Unix socket on Linux and macOS, and TCP token on Windows.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shard 4 Independent Homography Plane: Core Runtime -->
+    <div id="shard-dom-4" class="homography-plane shard-homography">
+      <div class="shard-abs-stage">
+        <div id="shard-copy-4" class="glass-selectable-copy">
+          <h3>Core runtime</h3>
+          <p>25 typed tools and 0 pip dependencies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       ACT III OVERLAY — The Shatter Reveal & Deep Technical Architecture
+       ===================================================================== -->
+  <section id="act3-overlay" class="act-overlay act3-overlay" aria-label="Act III: Architecture in Five Terms" aria-hidden="true">
+    <!-- Accessible hit target synchronized to 3D Smoked-Glass Back Sliver -->
+    <button type="button" id="act3-back-btn" class="back-sliver-btn" aria-label="Return to Smoked-Glass Monolith">
+      <span>&larr; Back</span>
+    </button>
+
+    <article class="act3-content architecture-folio">
+      <header class="architecture-header">
+        <div class="folio-masthead">
+          <p class="act3-eyebrow">Mavrick <span aria-hidden="true">/</span> Architecture</p>
+          <nav class="folio-index" aria-label="Architecture sections">
+            <a href="#architecture-guarantees">Guarantees</a>
+            <a href="#architecture-pipeline">Pipeline</a>
+            <a href="#architecture-platforms">Platforms</a>
+          </nav>
+        </div>
+        <h2 class="act3-title">
+          <span class="type-mask"><span class="type-rise">Mavrick,</span></span>
+          <span class="type-mask"><em class="type-rise">in five guarantees.</em></span>
+        </h2>
+      </header>
+
+      <ol class="pillars-list" id="architecture-guarantees" aria-label="Five guarantees">
+        <li class="pillar-item">
+          <span class="pillar-num">01</span>
+          <div class="pillar-body">
+            <h3>Instant Router</h3>
+            <p>Deterministic local launch, AST math, and saved <code class="inline-code">/workflows</code> resolve in under <code class="inline-code">0.1 ms</code> (<code class="inline-code">0.039 ms</code> multi-app lookup) with zero LLM latency.</p>
+          </div>
+        </li>
+        <li class="pillar-item">
+          <span class="pillar-num">02</span>
+          <div class="pillar-body">
+            <h3>Mechanical Policy</h3>
+            <p>Every action and multi-step plan passes strict schema allowlists (<code class="inline-code">25</code> typed tools) and 4-tier risk scoring. Destructive actions lock initial focus on Cancel.</p>
+          </div>
+        </li>
+        <li class="pillar-item">
+          <span class="pillar-num">03</span>
+          <div class="pillar-body">
+            <h3>Inode-Pinned Batch Undo</h3>
+            <p>File moves walk <code class="inline-code">O_NOFOLLOW</code> parents, commit to an <code class="inline-code">fsync</code>-backed journal, and roll back batches in reverse order via atomic no-replace rename, preserving conflicts.</p>
+          </div>
+        </li>
+        <li class="pillar-item">
+          <span class="pillar-num">04</span>
+          <div class="pillar-body">
+            <h3>Multi-Provider Freedom</h3>
+            <p>Zero lock-in: switch between local Ollama, Groq, Cerebras, OpenRouter, custom OpenAI-compatible endpoints, or <code class="inline-code">agy</code>, with host-scoped keys and secret redaction.</p>
+          </div>
+        </li>
+        <li class="pillar-item">
+          <span class="pillar-num">05</span>
+          <div class="pillar-body">
+            <h3>Dual-Era MCP &amp; Cross-Platform Core</h3>
+            <p>Consent-gated <code class="inline-code">2026-07-28</code> discovery and legacy stdio MCP run on Linux, Windows, and macOS with zero third-party Python dependencies.</p>
+          </div>
+        </li>
+      </ol>
+
+      <!-- Interactive 5-Stage Mechanical Safety Pipeline -->
+      <section class="act3-subblock" id="architecture-pipeline" aria-labelledby="architecture-pipeline-title">
+        <div class="act3-subhead">
+          <h3 id="architecture-pipeline-title">Mechanical safety pipeline</h3>
+        </div>
+
+        <div class="pipeline-tabs" role="tablist" aria-label="Security pipeline stages">
+          <button type="button" class="pipe-tab is-active" data-stage="input" role="tab" aria-selected="true">01 &middot; Input</button>
+          <button type="button" class="pipe-tab" data-stage="schema" role="tab" aria-selected="false">02 &middot; Schema</button>
+          <button type="button" class="pipe-tab" data-stage="policy" role="tab" aria-selected="false">03 &middot; Policy</button>
+          <button type="button" class="pipe-tab" data-stage="exec" role="tab" aria-selected="false">04 &middot; Inode &amp; HMAC</button>
+          <button type="button" class="pipe-tab" data-stage="undo" role="tab" aria-selected="false">05 &middot; Fsync Undo</button>
+        </div>
+
+        <div id="pipeline-spec-card" class="pipeline-spec-card" aria-live="polite"></div>
+      </section>
+
+      <!-- Dispatch Latency & Platform Matrix -->
+      <section class="act3-subblock" id="architecture-platforms" aria-labelledby="architecture-platforms-title">
+        <div class="act3-subhead">
+          <h3 id="architecture-platforms-title">Latency and platforms</h3>
+          <span class="act3-submeta">PYTHON 3.10+ STDLIB</span>
+        </div>
+
+        <div class="latency-bars">
+          <div class="lat-row">
+            <div class="lat-head"><span>Local Router (<code class="inline-code">router.py</code>)</span><span class="lat-val tone-sage">0.039 ms &middot; 0 LLM Calls</span></div>
+            <div class="lat-track"><div class="lat-fill tone-sage" style="width: 4%;"></div></div>
+          </div>
+          <div class="lat-row">
+            <div class="lat-head"><span>Groq / Cerebras Presets</span><span class="lat-val">~180&ndash;420 ms &middot; Host-Scoped HTTPS</span></div>
+            <div class="lat-track"><div class="lat-fill" style="width: 42%;"></div></div>
+          </div>
+          <div class="lat-row">
+            <div class="lat-head"><span>Ollama Loopback (<code class="inline-code">127.0.0.1:11434</code>)</span><span class="lat-val tone-sage">~350&ndash;900 ms &middot; Zero Cloud Egress</span></div>
+            <div class="lat-track"><div class="lat-fill tone-sage" style="width: 62%;"></div></div>
+          </div>
+          <div class="lat-row">
+            <div class="lat-head"><span>Warm <code class="inline-code">agy</code> Daemon (<code class="inline-code">mavrickd</code>)</span><span class="lat-val tone-amber">20&ndash;40 s &middot; Deep Turn</span></div>
+            <div class="lat-track"><div class="lat-fill tone-amber" style="width: 96%;"></div></div>
+          </div>
+        </div>
+
+        <div class="act3-platforms-grid">
+          <div class="act3-plat-card">
+            <div class="plat-head"><span class="plat-name">Linux</span><span class="plat-badge tone-sage">Primary</span></div>
+            <p>Pop!_OS / COSMIC GTK 3 HUD (<kbd>Super+M</kbd>), <code class="inline-code">mavrick_2.0.0_all.deb</code>, <code class="inline-code">renameat2</code>, <code class="inline-code">apt</code> &amp; <code class="inline-code">flatpak</code>.</p>
+          </div>
+          <div class="act3-plat-card">
+            <div class="plat-head"><span class="plat-name">macOS</span><span class="plat-badge tone-amber">Needs Verify</span></div>
+            <p>Headless CLI &amp; <code class="inline-code">mavrickd</code>, <code class="inline-code">.app</code> bundle discovery, <code class="inline-code">brew</code>, <code class="inline-code">renameatx_np</code> atomic moves.</p>
+          </div>
+          <div class="act3-plat-card">
+            <div class="plat-head"><span class="plat-name">Windows</span><span class="plat-badge tone-amber">Needs Verify</span></div>
+            <p>Headless CLI, <code class="inline-code">127.0.0.1</code> <code class="inline-code">tcp-token</code> (256-bit HMAC), SDDL DACL, <code class="inline-code">winget</code> / <code class="inline-code">scoop</code>.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="act3-footer-actions">
+        <button type="button" id="act3-download-btn" class="cream-pill-btn">Download Mavrick</button>
+        <a href="https://github.com/dhyairya1710/mavrick" class="nav-text-link" target="_blank" rel="noopener noreferrer">Source on GitHub &#8599;</a>
+      </footer>
+    </article>
+  </section>
+
+  <!-- =====================================================================
+       Static Accessible Fallback (No-WebGL or Reduced Motion)
+       ===================================================================== -->
+  <main id="static-fallback" class="static-fallback" hidden>
+    <div class="static-shell">
+      <header class="static-header">
+        <span class="brand-wordmark"><span class="brand-diamond">&#9671;</span> Mavrick <span class="brand-ver">v2.0</span></span>
+        <div class="static-links">
+          <a href="https://github.com/dhyairya1710/mavrick" class="nav-text-link" target="_blank" rel="noopener noreferrer">GitHub &#8599;</a>
+          <button type="button" class="cream-pill-btn" data-open-download>Download</button>
+        </div>
+      </header>
+
+      <section class="static-hero">
+        <h1 class="act1-title">
+        <span class="type-mask"><span class="type-rise">Grown,</span></span>
+        <span class="type-mask"><em class="type-rise display-phrase">not built.</em></span>
+      </h1>
+        <p class="act1-caption">A local-first command palette. Instant actions, governed by policy.</p>
+      </section>
+
+      <section class="static-hud-card" aria-label="Mavrick command simulator">
+        <div class="act3-eyebrow">INTERACTIVE COMMAND SIMULATOR</div>
+        <form id="static-cmd-form" class="static-command" autocomplete="off">
+          <label for="static-cmd-input" class="visually-hidden">Command or expression</label>
+          <input id="static-cmd-input" type="text" maxlength="256" spellcheck="false">
+          <button type="submit" class="cream-pill-btn">Run</button>
+        </form>
+        <div class="static-presets">
+          <button type="button" class="pipe-tab is-active" data-preset="open files, vlc and vscode">open files, vlc and vscode</button>
+          <button type="button" class="pipe-tab" data-preset="245 * 18.5">245 * 18.5</button>
+          <button type="button" class="pipe-tab" data-preset="organize downloads">organize downloads</button>
+          <button type="button" class="pipe-tab" data-preset="purge apt cache">purge apt cache</button>
+        </div>
+        <div class="static-hud-result" aria-live="polite">
+          <strong id="static-out-badge"></strong>
+          <div id="static-out-title"></div>
+          <div id="static-out-detail"></div>
+        </div>
+        <div class="static-actions">
+          <button type="button" class="cream-pill-btn" id="static-act-primary" hidden></button>
+          <button type="button" class="nav-text-btn" id="static-act-secondary" hidden></button>
+        </div>
+      </section>
+
+      <section class="static-pillars architecture-folio">
+        <header class="architecture-header">
+          <div class="folio-masthead">
+            <p class="act3-eyebrow">Mavrick <span aria-hidden="true">/</span> Architecture</p>
+          </div>
+          <h2 class="act3-title">
+            <span class="type-mask"><span class="type-rise">Mavrick,</span></span>
+            <span class="type-mask"><em class="type-rise">in five guarantees.</em></span>
+          </h2>
+        </header>
+        <ol class="pillars-list">
+          <li class="pillar-item"><span class="pillar-num">01</span><div class="pillar-body"><h3>Instant Router</h3><p>Deterministic local launch, AST math, and saved /workflows resolve in under 0.1 ms with zero LLM latency.</p></div></li>
+          <li class="pillar-item"><span class="pillar-num">02</span><div class="pillar-body"><h3>Mechanical Policy</h3><p>Every action passes strict schema allowlists and risk scoring before execution. Destructive actions lock initial focus on Cancel.</p></div></li>
+          <li class="pillar-item"><span class="pillar-num">03</span><div class="pillar-body"><h3>Inode-Pinned Batch Undo</h3><p>File moves pin source inodes, commit to an fsync-backed journal, and roll back batches in reverse order while preserving conflicts.</p></div></li>
+          <li class="pillar-item"><span class="pillar-num">04</span><div class="pillar-body"><h3>Multi-Provider Freedom</h3><p>Switch between Ollama, Groq, Cerebras, OpenRouter, OpenAI-compatible endpoints, or agy with host-scoped keys.</p></div></li>
+          <li class="pillar-item"><span class="pillar-num">05</span><div class="pillar-body"><h3>Dual-Era MCP &amp; Cross-Platform Core</h3><p>Consent-gated 2026-07-28 discovery and legacy stdio MCP across Linux, Windows, and macOS with zero third-party Python dependencies.</p></div></li>
+        </ol>
+      </section>
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       Minimal Download Modal
+       ===================================================================== -->
+  <div id="download-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <span class="act3-eyebrow">RELEASE v2.0.0 &middot; PYTHON 3.10+ STDLIB</span>
+          <h2 id="modal-title" class="modal-title">Get Mavrick</h2>
+        </div>
+        <button type="button" id="modal-close-btn" class="modal-close-btn" aria-label="Close download modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-install-options">
+          <section class="modal-card" aria-labelledby="modal-debian">
+            <div>
+              <p class="modal-card-tag">Linux desktop</p>
+              <h3 id="modal-debian">Debian package</h3>
+              <p>Installs the GTK 3 launcher and the <code>mavrickd</code> user service. Run from the directory containing the package.</p>
+            </div>
+            <div class="modal-cmd-row">
+              <code>sudo apt install ./mavrick_2.0.0_all.deb</code>
+              <button type="button" class="modal-copy-btn" data-copy="sudo apt install ./mavrick_2.0.0_all.deb" aria-label="Copy Debian installation command">Copy</button>
+            </div>
+          </section>
+
+          <section class="modal-card" aria-labelledby="modal-wheel">
+            <div>
+              <p class="modal-card-tag">Linux / macOS / Windows</p>
+              <h3 id="modal-wheel">Python wheel</h3>
+              <p>Run from the directory containing the built wheel. The CLI uses Python 3.10+ and has zero pip dependencies.</p>
+            </div>
+            <div class="modal-cmd-row">
+              <code>python -m pip install ./mavrick-2.0.0-py3-none-any.whl</code>
+              <button type="button" class="modal-copy-btn" data-copy="python -m pip install ./mavrick-2.0.0-py3-none-any.whl" aria-label="Copy Python wheel installation command">Copy</button>
+            </div>
+          </section>
+
+          <section class="modal-card" aria-labelledby="modal-setup">
+            <div>
+              <p class="modal-card-tag">After installation</p>
+              <h3 id="modal-setup">Setup</h3>
+              <p>Choose a provider and configure local preferences.</p>
+            </div>
+            <div class="modal-cmd-row">
+              <code>mavrick --setup</code>
+              <button type="button" class="modal-copy-btn" data-copy="mavrick --setup" aria-label="Copy setup command">Copy</button>
+            </div>
+          </section>
+        </div>
+
+        <div class="modal-footer">
+          <a href="https://github.com/dhyairya1710/mavrick" class="cream-pill-btn" target="_blank" rel="noopener noreferrer">Open GitHub repository &#8599;</a>
+          <button type="button" class="modal-copy-btn" data-copy="https://github.com/dhyairya1710/mavrick" aria-label="Copy GitHub repository URL">Copy URL</button>
+          <a href="https://github.com/dhyairya1710/mavrick/blob/main/README.md" class="nav-text-link" target="_blank" rel="noopener noreferrer">Read README</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

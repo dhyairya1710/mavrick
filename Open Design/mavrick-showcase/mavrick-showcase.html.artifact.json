@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "MAVRICK — Autonomous Pop!_OS Desktop Intelligence",
+  "entry": "Open Design/mavrick-showcase/mavrick-showcase.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "standalone",
+    "site",
+    "png",
+    "jpeg",
+    "pdf"
+  ],
+  "createdAt": "2026-11-21T12:31:39.761Z",
+  "updatedAt": "2026-11-21T12:31:39.761Z",
+  "sourceSkillId": "od:prototype:web-prototype",
+  "designSystemId": "user:opendesign-inspired",
+  "metadata": {
+    "brief": {
+      "text": "Create an interactive showcase and landing page for MAVRICK styled like open-design.ai"
+    }
+  }
+}

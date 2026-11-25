@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "entryPath": "Open Design/mavrick-showcase/mavrick-showcase.html",
+      "title": "MAVRICK — Autonomous Pop!_OS Desktop Intelligence",
+      "skillId": "od:prototype:web-prototype",
+      "designSystemId": "user:opendesign-inspired",
+      "date": "2026-11-21T12:31:39.791Z",
+      "signature": {
+        "accent": "#63fe13",
+        "displayFont": "Albert Sans",
+        "bodyFont": "Albert Sans",
+        "theme": "light",
+        "hero": "centred"
+      }
+    }
+  ]
+}
